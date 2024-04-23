@@ -8,7 +8,7 @@ pandas
 numpy
 psycopg2
 python-ulid
-"passlib[bcrypt]"
+passlib[bcrypt]
 python-dotenv
-"python-jose[cryptography]"
+python-jose[cryptography]
 python-multipart
