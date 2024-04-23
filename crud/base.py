@@ -1,4 +1,5 @@
 from typing import TypeVar,Generic, Type, Optional, Any, List
+from ulid import ULID
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
@@ -52,8 +53,10 @@ class CRUDBase(Generic[TableModel,CreateModel, UpdateModel]):
         
         row_data = jsonable_encoder(obj)
 
+        db_obj = { **row_data, 'id': ULID().hex}
 
-        in_schema_form = self.model( **row_data )
+
+        in_schema_form = self.model( **db_obj )
         db.add(in_schema_form)  
 
         db.commit()
