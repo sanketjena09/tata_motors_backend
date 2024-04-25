@@ -21,7 +21,7 @@ def token_verify_middleware(request:Request):
 
     start_time = datetime.strptime("1970-01-01 00:00:00", "%Y-%m-%d %H:%M:%S")
     
-    if (datetime.now(UTC) - start_time).total_seconds() > time:
+    if (datetime.now() - start_time).total_seconds() > time:
         raise AppException(status_code=status.HTTP_401_UNAUTHORIZED,message="token expired")
 
     newHeaders = MutableHeaders(request.headers)
