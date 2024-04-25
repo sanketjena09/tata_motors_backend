@@ -17,7 +17,7 @@ password_context=CryptContext(schemes=['bcrypt'],deprecated="auto")
 
 user_router = APIRouter(tags=['USER'])
 
-@user_router.get('/')
+@user_router.get('/',dependencies=[Depends(token_verify_middleware),Depends(oauth2_scheme)])
 def get_all_users(db:Session = Depends(get_db)):
     roles = CRUDUsersInstance.get_all_record(db)
     return roles
